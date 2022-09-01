@@ -8,6 +8,7 @@ import ReactDOM from "react-dom"
 import '../Css/App.css';
 // import Particle from './particles';
 // import Setupenv from "./setupenv";
+import Ongoing  from "./ongoing";
 import Knowledge from "./knowledge";
 import Footer from './footer';
 import CollectionList from "./collectionListGE";
@@ -44,6 +45,7 @@ class App extends React.Component {
               <Route path="/blog/:id" element={<SingleBlog />}></Route>
               <Route path="/collectionlist" element={<CollectionList />}></Route>
               {/* <Route path="/setup" element={<Setupenv />}></Route> */}
+              <Route path="/" element={<Ongoing />}></Route>
             </Routes>  
           </BrowserRouter>  
           <GitFooter />
@@ -93,7 +95,7 @@ class Greeting extends React.Component {
     const Text = () => <div>{Date().toLocaleString()}</div>;
     return (      
       <div className="lmarging01" >
-        <header>Good {this.state.timeOfDay} to you, this is the development site of <em>George Eliot Scholar!</em></header> 
+        <header>Good {this.state.timeOfDay} to you, this is the development of <em>George Eliot Digital Projects!</em></header> 
         <div>
           <h2 className = 'button_main button_border' id="more" onClick={this.toggleTime}> {this.state.showTime ? "Hide time" : "What Time is it now?" }</h2>          
           <h2 className="timedate">{this.state.showTime ? <Text /> : null} </h2>
