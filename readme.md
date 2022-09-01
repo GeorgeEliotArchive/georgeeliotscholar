@@ -1,5 +1,8 @@
-# Getting Started with Create React App
-# Version 1.1
+# Version 0.0
+
+This repository hosts test code for Scholar, a sister site of George Eliot Archive.
+
+#Creating an app with React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
