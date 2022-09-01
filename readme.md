@@ -2,7 +2,7 @@
 
 This repository hosts test code for Scholar, a sister site of George Eliot Archive.
 
-#Creating an app with React
+# Creating an app with React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
