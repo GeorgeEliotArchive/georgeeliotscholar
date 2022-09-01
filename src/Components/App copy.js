@@ -11,13 +11,12 @@ import Togglebk from "./toggletheme";
 import '../Css/App.css';
 // import Particle from './particles';
 // import Setupenv from "./setupenv";
-import Ongoing  from "./ongoing";
 import Knowledge from "./knowledge";
 import Footer from './footer';
 import Fetchapi from "./fetchapi";
 // import Blog from "./blog/mediumblog";
-import Blog from "./blog/mediumblog";
-import { BrowserRouter } from "react-router-dom";
+// import Blog from "./blog/mediumblog";
+// import { BrowserRouter } from "react-router-dom";
 
 
 
@@ -116,22 +115,12 @@ class Showmain extends React.Component {
       switch (this.state.active) {
         case 1: 
         return <Fetchapi />;
-        case 2:
-          return <Ongoing />;
         case 3:
           return <Knowledge />;
-        case 4:
-        
-          // return <Setupenv />
-        
-          // return <Blog />;
-          return (<BrowserRouter><Blog /></BrowserRouter>) 
         default:
-          
-          return <Ongoing />;
+          break;
       }
     }
-  
     render() {
       
     
