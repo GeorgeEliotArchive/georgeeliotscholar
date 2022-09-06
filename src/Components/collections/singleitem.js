@@ -6,7 +6,7 @@
 
   2. front-page pdf generator
 
-Edited by Libo Sun, Mar 2022; Cj Short, Aug 2022 
+Edited by Cj Short, Sept. 2022 
 Auburn University */
 
 import axios from "axios";
@@ -301,16 +301,16 @@ const pdfdata=(posts)=>{
      * Used for pdfmaker. (Like CSS)
      */
     styles: {
-      brand: { // repping the George Eliot Archive brand.
+      brand: { // repping the George Eliot Scholars brand.
         font: 'Times',
         fontSize: 18,
-        color: "#c52d2d",
+        color: "#6fac46",
       },
       title:{ // document title font
         font: 'Times',
         fontSize: 16
       },
-      header: { //normal text. don't let name fool you!
+      normal: { //normal text. don't let name fool you!
         font: 'Times',
         fontSize: 12,
         color: "#000000",
@@ -341,6 +341,7 @@ const pdfdata=(posts)=>{
   let dlen =  text.length;
   var title = "";
   var header_text = "";
+  var author = "";
   for(let i= 0; i < dlen; i ++){
     /* set title as file name */
     if (text[i].element.name === "Title") {
@@ -352,12 +353,12 @@ const pdfdata=(posts)=>{
       style: ""
     }
 
-    if (text[i].element.name === "Rights") {
+    /*if (text[i].element.name === "Rights") {
       header_text = "Copyright License";  
-    }
-    else{
-      header_text = text[i].element.name
-    }
+    }*/
+    
+    header_text = text[i].element.name
+    
     /* doc title is here. cleaned for unnecessary html -Cj */
     var docTitle = '';
     if (text[i].element.name === "Title"){
@@ -372,9 +373,12 @@ const pdfdata=(posts)=>{
       //}
       docTitle = docTitle.replace(/\(.+?\)/gm, '')
     }
+    if (text[i].element.name === "Creator"){
+      author = text[i].text
+    }
     var d1 =  {
           text: header_text,
-          style: 'header'
+          style: 'normal'
         }
 
     /* maintain the description which may:
@@ -382,8 +386,9 @@ const pdfdata=(posts)=>{
     2. result in a long text hence being truncated */
     
     var d2txt = text[i].text.replace(/<(.|\n)*?>/g, '');  
-    d2txt = d2txt.replace(/&nbsp;/g, ' ');
-    d2txt = d2txt.replace(/amp;/g, ' ');
+    d2txt = d2txt.replace(/&nbsp;/g, '');
+    d2txt = d2txt.replace(/amp;/g, '');
+    d2txt = d2txt.replace(/\n/g, '');
     d2txt =  truncate(d2txt, len_words);
     var d2 = {
       text: d2txt,
@@ -400,22 +405,21 @@ const pdfdata=(posts)=>{
     //ASK ABOUT CONSISTENCY
     dd.content.push({text: docTitle , style:'quote', margin:[0,2,0,2.5]});
     if (d1.text!== "Relation" && d1.text !== "Original Format" && d1.text !== "Email"
-      && d1.text!== "Publisher" && d1.text !== "Date" && d1.text !=="Copyright License" 
+      && d1.text!== "Publisher" && d1.text !== "Date" && d1.text !== "Author" 
       && d1.text !== "Title" && d1.text !== 'Description'){
-      dd.content.push({text: d1.text + ": " + d2.text, style:'header', margin:[0,0,0,2.5]}) ;
+      dd.content.push({text: d1.text + ": " + d2.text, style:'normal', margin:[0,0,0,2.5]}) ;
     }
   }
-  dd.content.push({text: "Collection: ", style: 'header', margin: [0,-5,0,2.5]})
+  //dd.content.push({text: "Collection: ", style: 'normal', margin: [0,-5,0,2.5]})
   /* Adds a solid line underneath metadata. */
   dd.content.push({canvas:[{type: 'line', x1: 0, y1: 50, x2: 495, y2: 50, lineWidth: 1}], margin:[0,20,0,20]});
   /* Adds attribution to cover page. */
-  dd.content.push({text: ["Published by: ",
-  {text:"George Eliot Archive", style:'quote'},
+  dd.content.push({text: ["Suggested citation:\n ",
+  author + ' "' + title + '." ',
+  {text: "George Eliot Scholars", style: 'quote'},
   ", edited by Beverley Park Rilett, ",
-  {text: 'http://GeorgeEliotArchive.org', link: 'http://GeorgeEliotArchive.org', style: 'web'},
-  ". Please attribute the ",
-  {text: "George Eliot Archive", style:'quote'},
-  " as your source."], style:'header'}) 
+  {text: 'http://GeorgeEliotScholars.org', link: 'http://GeorgeEliotScholars.org', style: 'web'},
+  ". Accessed [Date]."]}) 
   return [dd, title];
 }
 

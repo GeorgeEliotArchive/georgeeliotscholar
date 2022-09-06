@@ -17,7 +17,7 @@ import Omekaapi from "./omekaapi";
 
 import { Routes, Route,  BrowserRouter } from "react-router-dom";
 
-import SingleBlog from "./blog/singleblog";
+// import SingleBlog from "./blog/singleblog";
 
 import Layout from "./Menubar/Layout/Layout";
 import GitFooter from "./footer/footer";
@@ -40,10 +40,10 @@ class App extends React.Component {
            <Greeting /> 
             <Routes>
               {/* <Route path="/blog" element={<Blog />} > </Route> */}
-              <Route path="/omeka" element={<Omekaapi />} > </Route>
-              <Route path="/knowledge" element={<Knowledge/>}></Route>
-              <Route path="/blog/:id" element={<SingleBlog />}></Route>
-              <Route path="/collectionlist" element={<CollectionList />}></Route>
+              <Route path="/scholars/omeka" element={<Omekaapi />} > </Route>
+              <Route path="/scholars/knowledge" element={<Knowledge/>}></Route>
+              {/*<Route path="/blog/:id" element={<SingleBlog />}></Route>*/}
+              <Route path="/scholars/collectionlist" element={<CollectionList />}></Route>
               {/* <Route path="/setup" element={<Setupenv />}></Route> */}
               <Route path="/" element={<Ongoing />}></Route>
             </Routes>  
@@ -95,7 +95,7 @@ class Greeting extends React.Component {
     const Text = () => <div>{Date().toLocaleString()}</div>;
     return (      
       <div className="lmarging01" >
-        <header>Good {this.state.timeOfDay} to you, this is the development of <em>George Eliot Digital Projects!</em></header> 
+        <header>Good {this.state.timeOfDay}, this is the development site of <em>George Eliot Digital Projects!</em></header> 
         <div>
           <h2 className = 'button_main button_border' id="more" onClick={this.toggleTime}> {this.state.showTime ? "Hide time" : "What Time is it now?" }</h2>          
           <h2 className="timedate">{this.state.showTime ? <Text /> : null} </h2>
