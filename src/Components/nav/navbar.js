@@ -13,19 +13,19 @@ function Navbar(props) {
         </li>
         <li className="menu_list">
           {" "}
-          <NavLink to="/scholars/knowledge" onClick={props.clicked}>
+          <NavLink to="/georgeeliotscholars/knowledge" onClick={props.clicked}>
             Knowledge
           </NavLink>
         </li>
         <li className="menu_list">
           {" "}
-          <NavLink to="/scholars/collectionlist" onClick={props.clicked}>
+          <NavLink to="/georgeeliotscholars/collectionlist" onClick={props.clicked}>
             Collections
           </NavLink>
         </li>
         <li className="menu_list">
           {" "}
-          <NavLink to="/scholars/omeka" onClick={props.clicked}>
+          <NavLink to="/georgeeliotscholars/omeka" onClick={props.clicked}>
             Omeka Tools
           </NavLink>
         </li>
