@@ -7,25 +7,25 @@ function Navbar(props) {
     <nav className="home_bar">
       <ul className="menu">
         <li className="menu_list">
-          <NavLink to="/georgeeliotscholars" onClick={props.clicked}>
+          <NavLink to="/" onClick={props.clicked}>
             Home
           </NavLink>{" "}
         </li>
         <li className="menu_list">
           {" "}
-          <NavLink to="/georgeeliotscholars/knowledge" onClick={props.clicked}>
+          <NavLink to="/knowledge" onClick={props.clicked}>
             Knowledge
           </NavLink>
         </li>
         <li className="menu_list">
           {" "}
-          <NavLink to="/georgeeliotscholars/collectionlist" onClick={props.clicked}>
+          <NavLink to="/collectionlist" onClick={props.clicked}>
             Collections
           </NavLink>
         </li>
         <li className="menu_list">
           {" "}
-          <NavLink to="/georgeeliotscholars/omeka" onClick={props.clicked}>
+          <NavLink to="/omeka" onClick={props.clicked}>
             Omeka Tools
           </NavLink>
         </li>
