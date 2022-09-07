@@ -45,7 +45,7 @@ class App extends React.Component {
               {/*<Route path="/blog/:id" element={<SingleBlog />}></Route>*/}
               <Route path="/georgeeliotscholars/collectionlist" element={<CollectionList />}></Route>
               {/* <Route path="/setup" element={<Setupenv />}></Route> */}
-              <Route path="/georgeeliotscholars" element={<Ongoing />}></Route>
+              <Route path="/" element={<Ongoing />}></Route>
             </Routes>  
           </BrowserRouter>  
           <GitFooter />
