@@ -40,12 +40,12 @@ class App extends React.Component {
            <Greeting /> 
             <Routes>
               {/* <Route path="/blog" element={<Blog />} > </Route> */}
-              <Route path="/omeka" element={<Omekaapi />} > </Route>
-              <Route path="/knowledge" element={<Knowledge/>}></Route>
+              <Route path="/scholarsomeka" element={<Omekaapi />} > </Route>
+              <Route path="/scholarsknowledge" element={<Knowledge/>}></Route>
               {/*<Route path="/blog/:id" element={<SingleBlog />}></Route>*/}
-              <Route path="/collectionlist" element={<CollectionList />}></Route>
+              <Route path="/scholarscollectionlist" element={<CollectionList />}></Route>
               {/* <Route path="/setup" element={<Setupenv />}></Route> */}
-              <Route path="/" element={<Ongoing />}></Route>
+              <Route path="/scholars" element={<Ongoing />}></Route>
             </Routes>  
           </BrowserRouter>  
           <GitFooter />
