@@ -11,4 +11,5 @@ Scholars branch is live!
 
 - padding is off on pdf generation
 - website stalls a little on initial landing
-- website urls mimic those of Archive
+- refreshing leads to 404 error
+- ~~website urls mimic those of Archive~~
