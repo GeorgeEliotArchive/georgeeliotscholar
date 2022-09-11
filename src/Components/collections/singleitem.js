@@ -31,7 +31,7 @@ pdfMake.fonts = {
   }
 };
 
-const len_words = 50;
+//const len_words = 50;
 
 export default class ItemDetails extends React.Component {
 
@@ -342,6 +342,10 @@ const pdfdata=(posts)=>{
   var title = "";
   var header_text = "";
   var author = "";
+  var rights = "";
+  var source = "";
+  var converted_txt = "";
+
   for(let i= 0; i < dlen; i ++){
     /* set title as file name */
     if (text[i].element.name === "Title") {
@@ -349,9 +353,9 @@ const pdfdata=(posts)=>{
       title = title.replace('"', '');
     }
 
-    var mstyle = {
-      style: ""
-    }
+    //var mstyle = {
+    //  style: ""
+    //}
 
     /*if (text[i].element.name === "Rights") {
       header_text = "Copyright License";  
@@ -365,16 +369,19 @@ const pdfdata=(posts)=>{
       docTitle = text[i].text.replace(/<(.|\n)*?>/g, '');
       docTitle = docTitle.replace('"', '');
       docTitle = docTitle.replace(/"/g, '');
-      //if (docTitle.includes('Original')){
-      //  docTitle = docTitle.replace(/\(.+?\)/gm, '');
-      //}
-      //else if (docTitle.includes('Cabinet')){
-      //  docTitle = docTitle.replace(/\(.+?\)/gm, '')
-      //}
       docTitle = docTitle.replace(/\(.+?\)/gm, '')
     }
     if (text[i].element.name === "Creator"){
       author = text[i].text
+    }
+    if (text[i].element.name === "Source") {
+      source = text[i].text
+      converted_txt = source.match(/(?<=<em>)[^<]*/gm).toString();
+      source = source.replace(/(?<=<em>)[^<]*/gm, '');
+      source = source.replace(/<.+?>/gm, '');
+    }
+    if (text[i].element.name === "Rights") {
+      rights = text[i].text
     }
     var d1 =  {
           text: header_text,
@@ -385,15 +392,15 @@ const pdfdata=(posts)=>{
     1. contain html tags hence being removed
     2. result in a long text hence being truncated */
     
-    var d2txt = text[i].text.replace(/<(.|\n)*?>/g, '');  
-    d2txt = d2txt.replace(/&nbsp;/g, '');
-    d2txt = d2txt.replace(/amp;/g, '');
-    d2txt = d2txt.replace(/\n/g, '');
-    d2txt =  truncate(d2txt, len_words);
-    var d2 = {
-      text: d2txt,
-      style: mstyle.style,
-    }
+    //var d2txt = text[i].text.replace(/<(.|\n)*?>/g, '');  
+    //d2txt = d2txt.replace(/&nbsp;/g, '');
+    //d2txt = d2txt.replace(/amp;/g, '');
+    //d2txt = d2txt.replace(/\n/g, '');
+    ///d2txt =  truncate(d2txt, len_words);
+    //var d2 = {
+    //  text: d2txt,
+    //  style: mstyle.style,
+    //}
     
     /* push the text to dd object 
      * Changes meta header wording and separates title from text dump
@@ -402,14 +409,19 @@ const pdfdata=(posts)=>{
      */
     d1.text = d1.text.replace(/\bCreator\b/gm, 'Author(s)');
     d1.text = d1.text.replace(/\bSource\b/gm, 'Original Source');
-    //ASK ABOUT CONSISTENCY
-    dd.content.push({text: docTitle , style:'quote', margin:[0,2,0,2.5]});
-    if (d1.text!== "Relation" && d1.text !== "Original Format" && d1.text !== "Email"
-      && d1.text!== "Publisher" && d1.text !== "Date" && d1.text !== "Author" 
-      && d1.text !== "Title" && d1.text !== 'Description'){
-      dd.content.push({text: d1.text + ": " + d2.text, style:'normal', margin:[0,0,0,2.5]}) ;
-    }
   }
+    //ASK ABOUT CONSISTENCY
+    dd.content.push({text: docTitle , style:'header', margin:[0,2,0,2.5]});
+    dd.content.push({text: "Author(s): " + author , style:'header', margin:[0,0,0,2.5]});
+    dd.content.push({text: ["Original Source: ",
+      {text: converted_txt, style: 'quote'}, source], style:'header', margin:[0,0,0,2.5]});
+    dd.content.push({text: "Rights: " + rights , style:'header', margin:[0,0,0,2.5]});
+    //if (d1.text!== "Relation" && d1.text !== "Original Format" && d1.text !== "Email"
+    //  && d1.text!== "Publisher" && d1.text !== "Date" && d1.text !== "Author" 
+    //  && d1.text !== "Title" && d1.text !== 'Description'){
+    //  dd.content.push({text: d1.text + ": " + d2.text, style:'normal', margin:[0,0,0,2.5]}) ;
+    //}
+  
   //dd.content.push({text: "Collection: ", style: 'normal', margin: [0,-5,0,2.5]})
   /* Adds a solid line underneath metadata. */
   dd.content.push({canvas:[{type: 'line', x1: 0, y1: 50, x2: 495, y2: 50, lineWidth: 1}], margin:[0,20,0,20]});
@@ -424,6 +436,6 @@ const pdfdata=(posts)=>{
 }
 
 /* truncate a string by the number limit of words */
-function truncate(str, no_words) {
-  return str.split(" ").splice(0,no_words).join(" ");
-}
+//function truncate(str, no_words) {
+//  return str.split(" ").splice(0,no_words).join(" ");
+//}
