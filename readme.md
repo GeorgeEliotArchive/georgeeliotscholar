@@ -1,4 +1,4 @@
-# Version 0.2
+# Version 0.3
 
 This repository hosts test code for Scholar, a sister site of George Eliot Archive.
 
