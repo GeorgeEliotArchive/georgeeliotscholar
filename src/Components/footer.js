@@ -1,5 +1,5 @@
 /* footer.js - footer of the github.io splash page
- * Edited by Libo Sun, Jan 2022 
+ * Edited by Libo Sun, Jan 2022; Cj Short, Aug 2022
  * Auburn University 
  */
 
@@ -9,9 +9,12 @@ import importImageAU from '../Images/logo_auhorizontal.png';
 import importImageArchive from '../Images/logo_archive.jpg';
 import importImageCopyright from '../Images/copy_right_88x31.png';
 
+/* This is where the bottom of the github.io page is fixed. First div grouping within main div houses all necessary logos.
+ * center_image is the copyright image. foot_text houses the tiny text.
+ */
 const Footer = () => (
   <div className="footer">
-    
+      
       <div>
         <img className="left_image" src={importImageNnebraska} alt='Negraska'></img>
         <img className="left_image" src={importImageAU} alt='AU'></img>

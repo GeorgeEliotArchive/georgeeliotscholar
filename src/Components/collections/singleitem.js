@@ -304,13 +304,13 @@ const pdfdata=(posts)=>{
       brand: { // repping the George Eliot Scholars brand.
         font: 'Times',
         fontSize: 18,
-        color: "#6fac46",
+        color: "#6fac46", 
       },
       title:{ // document title font
         font: 'Times',
         fontSize: 16
       },
-      normal: { //normal text. don't let name fool you!
+      normal: { //normal text
         font: 'Times',
         fontSize: 12,
         color: "#000000",
@@ -363,7 +363,11 @@ const pdfdata=(posts)=>{
     
     header_text = text[i].element.name
     
-    /* doc title is here. cleaned for unnecessary html -Cj */
+    /* doc title is here. cleaned for unnecessary html 
+     * As requested, all elements are processed separately. This will help with data elements
+     * that need specific formatting. Processing as a bundle hindered this type of flexibility.
+     * Coincidentally, this approach seems to also fix padding issues.
+     */
     var docTitle = '';
     if (text[i].element.name === "Title"){
       docTitle = text[i].text.replace(/<(.|\n)*?>/g, '');
@@ -388,9 +392,7 @@ const pdfdata=(posts)=>{
           style: 'normal'
         }
 
-    /* maintain the description which may:
-    1. contain html tags hence being removed
-    2. result in a long text hence being truncated */
+    //vvvv separate generation no longer needs this -- remove for housekeeping vvvv
     
     //var d2txt = text[i].text.replace(/<(.|\n)*?>/g, '');  
     //d2txt = d2txt.replace(/&nbsp;/g, '');
@@ -410,12 +412,22 @@ const pdfdata=(posts)=>{
     d1.text = d1.text.replace(/\bCreator\b/gm, 'Author(s)');
     d1.text = d1.text.replace(/\bSource\b/gm, 'Original Source');
   }
-    //ASK ABOUT CONSISTENCY
+    /* The following code pushes each individual pdf element for generation.
+     * push(text,style,margin) - text is straightforward. can either be a string var or a string
+     * style - how the text is presented. made out of predefined styles in our case. see top of this file for styles
+     * margin - how the text is positioned. can either specify with 1 number, or with a list, [], that is read as
+     * left, top, right, bottom. 
+     */
     dd.content.push({text: docTitle , style:'header', margin:[0,2,0,2.5]});
     dd.content.push({text: "Author(s): " + author , style:'header', margin:[0,0,0,2.5]});
+    /* Advanced usage of push -- you can push text objects and strings. This requires you encapture the entire
+     * intended text with hard brackets, separate elements by commas, and follow normal text object creation. 
+     * This is good for when we need to follow a specific format, like MLA, or need to process hyperlinks.
+     */
     dd.content.push({text: ["Original Source: ",
       {text: converted_txt, style: 'quote'}, source], style:'header', margin:[0,0,0,2.5]});
     dd.content.push({text: "Rights: " + rights , style:'header', margin:[0,0,0,2.5]});
+    //vvvv remove if approved and housekeeping vvvv
     //if (d1.text!== "Relation" && d1.text !== "Original Format" && d1.text !== "Email"
     //  && d1.text!== "Publisher" && d1.text !== "Date" && d1.text !== "Author" 
     //  && d1.text !== "Title" && d1.text !== 'Description'){
