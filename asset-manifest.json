@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/georgeeliotscholars/static/css/main.e0af670e.css",
-    "main.js": "/georgeeliotscholars/static/js/main.8af5891f.js",
+    "main.css": "/georgeeliotscholars/static/css/main.c1fcde78.css",
+    "main.js": "/georgeeliotscholars/static/js/main.08d1fee5.js",
     "static/js/997.579cbcf7.chunk.js": "/georgeeliotscholars/static/js/997.579cbcf7.chunk.js",
     "static/js/820.def57208.chunk.js": "/georgeeliotscholars/static/js/820.def57208.chunk.js",
     "static/js/530.47bab541.chunk.js": "/georgeeliotscholars/static/js/530.47bab541.chunk.js",
@@ -14,12 +14,12 @@
     "static/media/knowledge.md": "/georgeeliotscholars/static/media/knowledge.cefd99324f9743cd259b.md",
     "index.html": "/georgeeliotscholars/index.html",
     "static/media/ongoing.md": "/georgeeliotscholars/static/media/ongoing.6e804719c4aa1eef69eb.md",
-    "main.e0af670e.css.map": "/georgeeliotscholars/static/css/main.e0af670e.css.map",
-    "main.8af5891f.js.map": "/georgeeliotscholars/static/js/main.8af5891f.js.map",
+    "main.c1fcde78.css.map": "/georgeeliotscholars/static/css/main.c1fcde78.css.map",
+    "main.08d1fee5.js.map": "/georgeeliotscholars/static/js/main.08d1fee5.js.map",
     "787.804f032f.chunk.js.map": "/georgeeliotscholars/static/js/787.804f032f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0af670e.css",
-    "static/js/main.8af5891f.js"
+    "static/css/main.c1fcde78.css",
+    "static/js/main.08d1fee5.js"
   ]
 }
