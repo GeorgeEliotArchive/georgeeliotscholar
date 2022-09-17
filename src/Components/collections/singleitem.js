@@ -345,6 +345,8 @@ const pdfdata=(posts)=>{
   var rights = "";
   var source = "";
   var converted_txt = "";
+  var source_auth = "";
+  var docTitle = '';
 
   for(let i= 0; i < dlen; i ++){
     /* set title as file name */
@@ -361,26 +363,31 @@ const pdfdata=(posts)=>{
       header_text = "Copyright License";  
     }*/
     
-    header_text = text[i].element.name
+    header_text = text[i].element.name;
     
     /* doc title is here. cleaned for unnecessary html 
      * As requested, all elements are processed separately. This will help with data elements
      * that need specific formatting. Processing as a bundle hindered this type of flexibility.
      * Coincidentally, this approach seems to also fix padding issues.
      */
-    var docTitle = '';
     if (text[i].element.name === "Title"){
       docTitle = text[i].text.replace(/<(.|\n)*?>/g, '');
       docTitle = docTitle.replace('"', '');
       docTitle = docTitle.replace(/"/g, '');
-      docTitle = docTitle.replace(/\(.+?\)/gm, '')
+      docTitle = docTitle.replace(/\(.+?\)/gm, '');
     }
-    if (text[i].element.name === "Creator"){
+    if (text[i].element.name === "Creator") {
       author = text[i].text
     }
     if (text[i].element.name === "Source") {
-      source = text[i].text
-      converted_txt = source.match(/(?<=<em>)[^<]*/gm).toString();
+      source = text[i].text;
+      if (source.indexOf("<") > 0) {
+        source_auth = source.substring(0, source.indexOf("<"));
+        source = source.replace(source_auth, '');
+      }
+      if (source.match(/(?<=<em>)[^<]*/gm) !== null) {
+        converted_txt = source.match(/(?<=<em>)[^<]*/gm).toString();
+      }
       source = source.replace(/(?<=<em>)[^<]*/gm, '');
       source = source.replace(/<.+?>/gm, '');
     }
@@ -392,18 +399,6 @@ const pdfdata=(posts)=>{
           style: 'normal'
         }
 
-    //vvvv separate generation no longer needs this -- remove for housekeeping vvvv
-    
-    //var d2txt = text[i].text.replace(/<(.|\n)*?>/g, '');  
-    //d2txt = d2txt.replace(/&nbsp;/g, '');
-    //d2txt = d2txt.replace(/amp;/g, '');
-    //d2txt = d2txt.replace(/\n/g, '');
-    ///d2txt =  truncate(d2txt, len_words);
-    //var d2 = {
-    //  text: d2txt,
-    //  style: mstyle.style,
-    //}
-    
     /* push the text to dd object 
      * Changes meta header wording and separates title from text dump
      * to better style the cover page. -Cj
@@ -418,21 +413,17 @@ const pdfdata=(posts)=>{
      * margin - how the text is positioned. can either specify with 1 number, or with a list, [], that is read as
      * left, top, right, bottom. 
      */
-    dd.content.push({text: docTitle , style:'header', margin:[0,2,0,2.5]});
-    dd.content.push({text: "Author(s): " + author , style:'header', margin:[0,0,0,2.5]});
+    dd.content.push({text: docTitle , style:'normal', margin:[0,2,0,10]});
+    dd.content.push({text: "Author(s): " + author , style:'normal', margin:[0,0,0,10]});
     /* Advanced usage of push -- you can push text objects and strings. This requires you encapture the entire
      * intended text with hard brackets, separate elements by commas, and follow normal text object creation. 
      * This is good for when we need to follow a specific format, like MLA, or need to process hyperlinks.
      */
     dd.content.push({text: ["Original Source: ",
-      {text: converted_txt, style: 'quote'}, source], style:'header', margin:[0,0,0,2.5]});
-    dd.content.push({text: "Rights: " + rights , style:'header', margin:[0,0,0,2.5]});
-    //vvvv remove if approved and housekeeping vvvv
-    //if (d1.text!== "Relation" && d1.text !== "Original Format" && d1.text !== "Email"
-    //  && d1.text!== "Publisher" && d1.text !== "Date" && d1.text !== "Author" 
-    //  && d1.text !== "Title" && d1.text !== 'Description'){
-    //  dd.content.push({text: d1.text + ": " + d2.text, style:'normal', margin:[0,0,0,2.5]}) ;
-    //}
+      {text: converted_txt, style: 'quote'}, source], style:'normal', margin:[0,0,0,10]});
+      if (rights !== '') {
+        dd.content.push({text: "Rights: " + rights , style:'normal', margin:[0,0,0,10]});
+      }
   
   //dd.content.push({text: "Collection: ", style: 'normal', margin: [0,-5,0,2.5]})
   /* Adds a solid line underneath metadata. */
@@ -443,11 +434,6 @@ const pdfdata=(posts)=>{
   {text: "George Eliot Scholars", style: 'quote'},
   ", edited by Beverley Park Rilett, ",
   {text: 'http://GeorgeEliotScholars.org', link: 'http://GeorgeEliotScholars.org', style: 'web'},
-  ". Accessed [Date]."]}) 
+  ". Accessed [Date]."], margin:[0,-10,0,0]}) 
   return [dd, title];
 }
-
-/* truncate a string by the number limit of words */
-//function truncate(str, no_words) {
-//  return str.split(" ").splice(0,no_words).join(" ");
-//}

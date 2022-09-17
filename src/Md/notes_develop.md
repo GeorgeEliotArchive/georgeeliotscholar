@@ -8,3 +8,4 @@
 4. Pdf elements are now generated separately. This allows Dr. Bev or any student that needs to do formatting changes that much needed flexibility. This seems to have also fixed padding issues. I will push this update
    to Archive as well. All of these changes and the area of importance for changing pdfMake formatting can be found in <singleitem.js>.
 5. Any changes to the footer of the github.io page can be found in <footer.js>.
+6. API Json seems to have a label for collection, might be able to add that to cover sheets.
