@@ -1,11 +1,24 @@
+## Version 0.4-stable -- 17.9.2022
+
+#### Updates
+- Formatting for "Original Source" in intended style
+
+#### Documentation
+- Documentation notes can be found here -> <notes_development.md>
+- Source code commenting for <singleitem.js> and <footer.js>
+  - Additional documentation will come as I have the chance
+
+#### Future Work
+- Button for navigation to sister sites (Archive, Review)
+
+# Previous Versions
+
 ## Version 0.3-stable -- 11.9.2022
 
 #### Updates
 - updated the way pdfs were generated -- rather than a for-loop iterating over each data header, now targets specific data headers
   - fixed: padding on pdf generation
   - fixed: issues with formating for "Original Source"
-
-# Previous Versions
 
 ## Version 0.2-stable -- 8.9.2022
 
