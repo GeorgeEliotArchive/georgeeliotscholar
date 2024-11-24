@@ -1,6 +1,6 @@
 # Version 0.4
 
-This repository hosts test code for Scholar, a sister site of George Eliot Archive.
+This repository hosts test code for George Eliot Scholars, a sister site of the George Eliot Archive. Contributors may upload and publish their George Eliot-related books, articles, presentations, conference papers, and other materials to the website using an online form. After review by the George Eliot Archive editors, it will be published to the digital commons at https://GeorgeEliotScholars.org. .
 
 # Creating an app with React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
